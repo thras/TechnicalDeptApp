@@ -176,6 +176,9 @@ Change password to the logged in user
 
 ## Back-end 
 
+### Database
+I used SQLite, is the default database that Djago use.
+
 ### The models
 **CustomUser** I use an abstract user model of Django to add new custom fields and I do this for two reasons. First because we can't do it later (after the first migration). Second at this project is for permissions and for future updates/upgrates.
 
