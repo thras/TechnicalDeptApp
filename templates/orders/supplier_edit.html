@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Edit supplier{% endblock %}
+{% block content %}
+
+
+{% if request.user.is_orderer or request.user.is_superuser %}
+<!-- Shows the form to edit a specific supplier 
+     If the login user isn't orderer or superuser he can't edit a supplier -->
+<div class="container" style="text-align: center">
+    <form method="post">{% csrf_token %}
+        {% for field in form.visible_fields %}
+        <div class="fieldWrapper">
+            <p style=" text-align: center"> {{ field.errors }}</p>
+            <p style="  text-align: center"><b>{{ field.label_tag }}</b> </p>
+            <p style="  text-align: center">{{ field }}</p>
+        </div>
+        {% endfor %}
+        <div style="text-align: center">
+            <p>Note: after update you will transfer to main supplier list</p>
+            <input class="btn btn-warning" type="submit" value="update">
+        </div>
+    </form>
+</div>
+{% else %}
+<!-- inform the user about the access denied -->
+<div class="container">
+    <div style="text-align: center">
+        <h1>Access denied</h1>
+        <h3>User {{request.user}}, you don't have permissions for this page!!!</h3>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

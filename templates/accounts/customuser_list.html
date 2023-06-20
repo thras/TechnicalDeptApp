@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+<!-- Title value -->
+{% block title %}Account List{% endblock %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- If the list isn't empty create a table with the CustomUser model data -->
+    {% if customuser_list %}
+    <div class="table-responsive">
+        <table class="table table-striped" style="border:1px solid black">
+            <tr>
+                <div class="col-sm-1">
+                    <th style="border:1px solid black; width: 5%">ID.</th>
+                </div>
+                <div class="col-sm-2">
+                    <th style="border:1px solid black; width: 15%">User</th>
+                </div>
+                <div class="col-sm-2">
+                    <th style="border:1px solid black; width: 20%">Admin</th>
+                </div>
+                <div class="col-sm-5">
+                    <th style="border:1px solid black; width: 20%">Technician</th>
+                </div>
+                <div class="col-sm-1">
+                    <th style="border:1px solid black; width: 20%">Orderer</th>
+                </div>
+                <div class="col-sm-1">
+                    <th style="border:1px solid black; width: 20%">Observer</th>
+                </div>
+            </tr>
+
+            {% for customuser in customuser_list %}
+            <tr>
+                <div class="col-sm-1">
+                    <td style="border:1px solid black">{{customuser.pk}}</td>
+                </div>
+                <div class="col-sm-2">
+                    <td style="border:1px solid black">{{ customuser.username }}</td>
+                </div>
+                <div class="col-sm-2">
+                    <td style="border:1px solid black">{{ customuser.is_superuser }}</td>
+                </div>
+                <div class="col-sm-5">
+                    <td style="border:1px solid black">{{ customuser.is_technician }}</td>
+                </div>
+                <div class="col-sm-1">
+                    <td style="border:1px solid black">{{ customuser.is_orderer }}</td>
+                </div>
+                <div class="col-sm-1">
+                    <td style="border:1px solid black">{{ customuser.is_observer }}</td>
+                </div>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <!-- import the pagination template -->
+    {% include "pagination.html" %}
+    <!-- If is empty inform the user -->
+    {% else %}
+    <div style="text-align: center">
+        <h3>User list is empty.</h3>
+    </div>
+
+    {% endif %}
+</div>
+
+{% endblock %}

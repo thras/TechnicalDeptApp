@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Add vehicle{% endblock %}
+{% block content %}
+
+<!-- Form to add a new vehicle -->
+<div class="container" style="text-align: center">
+    <form method="post">{% csrf_token %}
+        {% for field in form.visible_fields %}
+        <div class="fieldWrapper" style=" text-align: center">
+            <p style="text-align: center"> {{ field.errors }}</p>
+            <p style="text-align: center"><b>{{ field.label_tag }}</b> </p>
+            <p style="text-align: center">{{ field }}</p>
+        </div>
+        {% endfor %}
+        <div class="fieldWrapper" style="text-align: center">
+            <p>Note: after save you will transfer to main vehicle list</p>
+            <input class="btn btn-primary" type="submit" value="Save">
+        </div>
+    </form>
+</div>
+{% endblock %}

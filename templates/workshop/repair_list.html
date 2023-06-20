@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Repair list{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+    <!-- If the list isn't empty, creates a table with all the Repair model data if the call is from RepairListView, else creates a table of all the orders of a specific user if the call is from MyRepairListView -->
+    {% if repair_list %}
+    <div class="table-responsive">
+
+        <table class="table table-striped" style="border:1px solid black" width="90%">
+            <tr>
+                <div class="col-sm-1">
+                    <th style="border:1px solid black; width: 5%">ID.</th>
+                </div>
+                <div class="col-sm-2">
+                    <th style="border:1px solid black; width: 10%">Repair title</th>
+                </div>
+                <div class="col-sm-2">
+                    <th style="border:1px solid black; width: 10%">Vehicle</th>
+                </div>
+                <div class="col-sm-5">
+                    <th style="border:1px solid black; width: 25%">Issue</th>
+                </div>
+                <div class="col-sm-5">
+                    <th style="border:1px solid black; width: 20%">Repairs made</th>
+                </div>
+                <div class="col-sm-5">
+                    <th style="border:1px solid black; width: 10%">Status</th>
+                </div>
+                <div class="col-sm-1">
+                    <th style="border:1px solid black; width: 10%">User</th>
+                </div>
+                <div class="col-sm-1">
+                    <th style="border:1px solid black; width: 10%">Last update</th>
+                </div>
+            </tr>
+
+
+            {% for repair in repair_list %}
+            <tr>
+                <div class="col-sm-1">
+                    <td style="border:1px solid black"><a href="{% url 'repair_detail' repair.pk %}">{{repair.pk}}</a>
+                    </td>
+                </div>
+                <div class="col-sm-2">
+                    <td style="border:1px solid black">{{ repair.repair_title }}</td>
+                </div>
+                <div class="col-sm-2">
+                    <td style="border:1px solid black">{{ repair.broken_vehicle }}</td>
+                </div>
+                <div class="col-sm-5">
+                    <td style="border:1px solid black">{{ repair.issue }}</td>
+                </div>
+                <div class="col-sm-5">
+                    <td style="border:1px solid black">{{ repair.repairs_made }}</td>
+                </div>
+                <div class="col-sm-5">
+                    <td style="border:1px solid black">
+                        <pre>{{ repair.repair_status }}</pre>
+                    </td>
+                </div>
+                <div class="col-sm-1">
+                    <td style="border:1px solid black">{{ repair.author }}</td>
+                </div>
+                <div class="col-sm-1">
+                    <td style="border:1px solid black">{{ repair.updated_at }}</td>
+                </div>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+    <!-- import the pagination template -->
+    {% include "pagination.html" %}
+    <!-- If is empty inform the user -->
+    {% else %}
+    <div style="text-align: center">
+        <h3>Repair list is empty.</h3>
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

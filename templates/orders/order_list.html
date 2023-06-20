@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Order List{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+    <!-- If the list isn't empty, creates a table with all the Order model data if the call is from OrderListView, else creates a table of all the orders of a specific user if the call is from MyOrderListView -->
+    {% if order_list %}
+    <div class="table-responsive">
+        <table class="table table-striped" style="border:1px solid black" width="90%">
+            <tr>
+                <div class="col-sm-1">
+                    <th style="border:1px solid black; width: 5%">ID.</th>
+                </div>
+                <div class="col-sm-2">
+                    <th style="border:1px solid black; width: 15%">Order</th>
+                </div>
+                <div class="col-sm-2">
+                    <th style="border:1px solid black; width: 15%">Supplier</th>
+                </div>
+                <div class="col-sm-5">
+                    <th style="border:1px solid black; width: 35%">Ordered goods</th>
+                </div>
+                <div class="col-sm-5">
+                    <th style="border:1px solid black; width: 10%">Status</th>
+                </div>
+                <div class="col-sm-1">
+                    <th style="border:1px solid black; width: 10%">Orderer</th>
+                </div>
+                <div class="col-sm-1">
+                    <th style="border:1px solid black; width: 10%">Last update</th>
+                </div>
+            </tr>
+
+            {% for order in order_list %}
+            <tr>
+                <div class="col-sm-1">
+                    <td style="border:1px solid black"><a href="{% url 'order_detail' order.pk %}">{{order.pk}}</a></td>
+                </div>
+                <div class="col-sm-2">
+                    <td style="border:1px solid black">{{ order.order }}</td>
+                </div>
+                <div class="col-sm-2">
+                    <td style="border:1px solid black">{{ order.order_supplier }}</td>
+                </div>
+                <div class="col-sm-5">
+                    <td style="border:1px solid black">
+                        {{ order.body }}
+                    </td>
+                </div>
+                <div class="col-sm-5">
+                    <td style="border:1px solid black">
+                        <pre>{{ order.order_status }}</pre>
+                    </td>
+                </div>
+                <div class="col-sm-1">
+                    <td style="border:1px solid black">{{ order.author }}</td>
+                </div>
+                <div class="col-sm-1">
+                    <td style="border:1px solid black">{{ order.updated_at }}</td>
+                </div>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <!-- import the pagination template -->
+    {% include "pagination.html" %}
+    <!-- If is empty inform the user -->
+    {% else %}
+    <div style="text-align: center">
+        <h3>Order list is empty.</h3>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

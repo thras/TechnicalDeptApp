@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Delete order{% endblock %}
+{% block content %}
+
+<!-- If the login user is the author have permission to delete the order -->
+{% if object.author == request.user %}
+<div class="container">
+    <div style="text-align: center">
+        <h1>Delete</h1>
+        <form action="" method="post">{% csrf_token %}
+            <p>Are you sure you want to delete order ID {{ order.pk }} with title {{order.order}}?</p>
+            <p>Note: after delete you will transfer to your order list</p>
+            <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<!-- inform the user about the access denied -->
+<div class="container">
+    <div style="text-align: center">
+        <h1>Access denied</h1>
+        <h3>User {{request.user}}, you don't have permissions for this page!!!</h3>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,132 @@
+<!-- The basic template of the project. -->
+
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+  <!-- Customize the title based on the imported template value -->
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<!-- Page jumbotron (Bootstrap 5). -->
+<div class="row mb-2">
+  <div class="p-5 mb-4 bg-dark-subtle rounded-3">
+    <div class="container" style="align-content: center">
+      <h1>Technical department management</h1>
+    </div>
+    <div class="container" style="align-content: center">
+      <!--Shows whether a user is logged in or not and their username -->
+      <span>
+        {% if request.user.is_authenticated %}
+        Logged in user: {{ request.user }}
+        <a href="{% url  'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Responsive navigation bar (Bootstrap 5). -->
+<div class="row p-2 mb-2 ">
+  <nav class="navbar navbar-expand-lg bg-dark-subtle p-2 mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavBar"
+        aria-controls="myNavBar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="myNavBar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+              aria-expanded="false">Suppliers</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'supplier_list' %}">Suppliers list</a></li>
+              <li><a class="dropdown-item" href="{% url 'supplier_add' %}">New supplier</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+              aria-expanded="false">Orders</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'order_list' %}">Orders list</a></li>
+              <li><a class="dropdown-item" href="{% url 'order_completed' %}">Completed orders list</a></li>
+              <li><a class="dropdown-item" href="{% url 'order_incompleted' %}">Incompleted orders list</a></li>
+              <li><a class="dropdown-item" href="{% url 'my_order_list' %}">My orders</a></li>
+              <li><a class="dropdown-item" href="{% url 'order_add' %}">New order</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+              aria-expanded="false">Vehicles</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'vehicle_list' %}">Vehicle list</a></li>
+              <li><a class="dropdown-item" href="{% url 'vehicle_add' %}">New vehicle</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+              aria-expanded="false">Repairs</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'repair_list' %}">Repairs list</a></li>
+              <li><a class="dropdown-item" href="{% url 'repair_completed' %}">Completed repairs list</a></li>
+              <li><a class="dropdown-item" href="{% url 'repair_incompleted' %}">Incompleted repairs list</a></li>
+              <li><a class="dropdown-item" href="{% url 'my_repair_list' %}">My repairs</a></li>
+              <li><a class="dropdown-item" href="{% url 'repair_add' %}">New repair</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+              aria-expanded="false">API's</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'api_suppliers_list' %}" target="_blank">Suppliers API</a></li>
+              <li><a class="dropdown-item" href="{% url 'api_orders_list' %}" target="_blank">Orders API</a></li>
+              <li><a class="dropdown-item" href="{% url 'api_vehicle_list' %}" target="_blank">Vehicles API</a></li>
+              <li><a class="dropdown-item" href="{% url 'api_repair_list' %}" target="_blank">Repairs API</a></li>
+              <li><a class="dropdown-item" href="{% url 'api_user_list' %}" target="_blank">Users API</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="{% url 'redoc' %}" target="_blank">ReDoc</a></li>
+              <li><a class="dropdown-item" href="{% url 'swagger' %}" target="_blank">Swagger</a></li>
+              <li><a class="dropdown-item" href="{% url 'schema' %}" target="_blank">Download yaml file</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+              aria-expanded="false">User menu</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'customuser_list' %}">Users</a></li>
+              <li><a class="dropdown-item" href="{% url 'register' %}">Add user</a></li>
+              <li><a class="dropdown-item" href="{% url 'change_password' %}">Change password</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="row p-4 mb-2">
+  <!-- Import the templates from the Views -->
+  {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+
+</html>

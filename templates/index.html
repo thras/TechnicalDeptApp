@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Welcome{% endblock %}
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<!-- Home page -->
+<div class="row">
+    <div style="text-align: center">
+        <h1>Welcome user: {{request.user}}</h1>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div style="text-align: center">
+        <h1>Please login!!!</h1>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

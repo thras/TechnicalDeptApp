@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Supplier details{% endblock %}
+{% block content %}
+
+<!-- Create a table with the detail data of a specific supplier -->
+<div class="container" style="width: 60%;">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class=" col" scope="col">Properties</th>
+                <th class="col" scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>Id</td>
+                <td>{{ object.pk }}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{ object.supplier_name }}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{ object.address }}</td>
+            </tr>
+            <tr>
+                <td>VAT number</td>
+                <td>{{ object.vat }}</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>{{ object.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class=" d-flex justify-content-center">
+        <a class="btn btn-primary m-2" href="{% url 'supplier_edit' object.pk %}">Edit</a>
+        <a class="btn btn-danger  m-2" href="{% url 'supplier_delete' object.pk %}">Delete</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class=" d-flex justify-content-center">
+        <a href="{{request.META.HTTP_REFERER}}">Go Back.</a>
+    </div>
+</div>
+{% endblock %}

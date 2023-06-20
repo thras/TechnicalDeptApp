@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Error 404{% endblock %}
+
+<!-- At error 404 the user see this view.
+    IMPORTANT to see this view the DEBUG must be FALSE -->
+{% block content %}
+<div class="row">
+    <div style="text-align: center">
+        <h1>Error!!!</h1><br>
+        <h3>1. Please try again.</h3>
+        <h3>2. No permissions to user</h3>
+        <h3>3. Contact admins.</h3>
+    </div>
+</div>
+{% endblock %}

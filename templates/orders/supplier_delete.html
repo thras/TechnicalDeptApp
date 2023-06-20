@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Delete supplier{% endblock %}
+{% block content %}
+
+<!-- If the login user is only technician or only observer he can't delete a supplier -->
+{% if request.user.is_orderer or request.user.is_superuser %}
+<div class="container">
+    <div style="text-align: center">
+        <h1>Delete</h1>
+        <form action="" method="post">{% csrf_token %}
+            <p>Are you sure you want to delete supplier ID {{ supplier.pk }} with name {{supplier.supplier_name}}?</p>
+            <p>Note: after delete you will transfer to main supplier list</p>
+            <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<!-- inform the user about the access denied -->
+<div class="container">
+    <div style="text-align: center">
+        <h1>Access denied</h1>
+        <h3>User {{request.user}}, you don't have permissions for this page!!!</h3>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

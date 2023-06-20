@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Edit order{% endblock %}
+{% block content %}
+
+<!-- Shows the form to edit an specific order
+     If the login user is the author have permission to edit the order -->
+{% if object.author == request.user %}
+<div class="container" style="text-align: center">
+    <form method="post">{% csrf_token %}
+        {% for field in form.visible_fields %}
+        <div class="fieldWrapper">
+            <p style=" text-align: center"> {{ field.errors }}</p>
+            <p style="  text-align: center"><b>{{ field.label_tag }}</b> </p>
+            <p style="  text-align: center">{{ field }}</p>
+        </div>
+        {% endfor %}
+        <div style="text-align: center">
+            <p>After update you will transfer to your private list.</p>
+        </div>
+        <div style="text-align: center">
+            <input class="btn btn-warning" type="submit" value="update">
+        </div>
+    </form>
+</div>
+{% else %}
+<!-- inform the user about the access denied -->
+<div class="container">
+    <div style="text-align: center">
+        <h1>Access denied</h1>
+        <h3>User {{request.user}}, you don't have permissions for this page!!!</h3>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

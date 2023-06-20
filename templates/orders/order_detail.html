@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Order details{% endblock %}
+{% block content %}
+
+<!-- Create a table with the detail data of a specific order -->
+<div class="container" style="width: 60%;">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col" style="width: 15%;">Properties</th>
+                <th class="col" style="width: 85%;">Value</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>Id</td>
+                <td>{{ object.pk }}</td>
+            </tr>
+            <tr>
+                <td>Order title</td>
+                <td>{{ object.order }}</td>
+            </tr>
+            <tr>
+                <td>Supplier</td>
+                <td>{{ object.order_supplier }}</td>
+            </tr>
+            <tr>
+                <td>Ordered goods</td>
+                <td>{{ object.body }}</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>{{ object.order_status }}</td>
+            </tr>
+            <tr>
+                <td>Author</td>
+                <td>{{ object.author }}</td>
+            </tr>
+            <tr>
+                <td>Updated at</td>
+                <td>{{ object.updated_at }}</td>
+            </tr>
+            <tr>
+                <td>Created at</td>
+                <td>{{ object.created_at }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- If the login user is the author shows the edit and delete buttons, else only the back link -->
+{% if object.author == request.user %}
+<div class="row">
+    <div class=" d-flex justify-content-center">
+        <a class="btn btn-primary m-2" href="{% url 'order_edit' object.pk %}">Edit</a>
+        <a class="btn btn-danger m-2" href="{% url 'order_delete' object.pk %}">Delete</a>
+    </div>
+</div>
+<div class="row">
+    <div class=" d-flex justify-content-center">
+        <a href="{{request.META.HTTP_REFERER}}">Go Back.</a>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class=" d-flex justify-content-center">
+        <a href="{{request.META.HTTP_REFERER}}">Go Back.</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

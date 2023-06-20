@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Add repair{% endblock %}
+
+{% block content %}
+<!-- Shows the fort to add a new repair -->
+<div class="container" style="text-align: center">
+    <form method="post">{% csrf_token %}
+        {% for field in form.visible_fields %}
+        <div class="fieldWrapper">
+            <p style="text-align: center"> {{ field.errors }}</p>
+            <p style="text-align: center"><b>{{ field.label_tag }}</b> </p>
+            <p style="text-align: center">{{ field }}</p>
+        </div>
+        {% endfor %}
+        <div style="text-align: center">
+            <p>Note: after delete you will transfer to your repair list</p>
+            <input class="btn btn-primary" type="submit" value="Save">
+        </div>
+    </form>
+</div>
+{% endblock %}

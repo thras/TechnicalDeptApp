@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Log-in{% endblock %}
+{% block content %}
+
+<div style="text-align: center">
+    <h1>User login</h1>
+</div>
+
+<!-- Shows message to the user for incorrect username or password -->
+{% if form.errors %}
+<div style="text-align: center">
+    <p>Username or password is incorrect. Please try again.</p>
+</div>
+{% else %}
+<div style="text-align: center">
+    <p>Enter your credentials:</p>
+</div>
+
+{% endif %}
+
+<!-- Login form -->
+<form method="post">{% csrf_token %}
+    {% for field in form.visible_fields %}
+    <div class="fieldWrapper">
+        <p style=" text-align: center"> {{ field.errors }}</p>
+        <p style="  text-align: center"><b>{{ field.label_tag }}</b> </p>
+        <p style="  text-align: center">{{ field }}</p>
+    </div>
+    {% endfor %}
+    <div style="text-align: center">
+        <input class="btn btn-primary" type="submit" value="Login">
+    </div>
+
+</form>
+
+{% endblock %}

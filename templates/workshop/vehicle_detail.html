@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+<!-- Title value -->
+{% block title %}Vehicle details{% endblock %}
+{% block content %}
+
+<!-- Create a table with the detail data of a specific vehicle -->
+<div class="container" style="width: 60%;">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class=" col" scope="col">Propertie</th>
+                <th class="col" scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>Id</td>
+                <td>{{ object.pk }}</td>
+            </tr>
+            <tr>
+                <td>Order title</td>
+                <td>{{ object.vehicle_id }}</td>
+            </tr>
+            <tr>
+                <td>Supplier</td>
+                <td>{{ object.vehicle_sn }}</td>
+            </tr>
+            <tr>
+                <td>Order</td>
+                <td>{{ object.vehicle_type }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class=" d-flex justify-content-center">
+        <a class="btn btn-primary m-2" href="{% url 'vehicle_history' object.pk %}">Repairs history</a>
+        <a class="btn btn-primary m-2" href="{% url 'vehicle_edit' object.pk %}">Edit</a>
+        <a class="btn btn-danger m-2" href="{% url 'vehicle_delete' object.pk %}">Delete</a>
+    </div>
+</div>
+<div class="row">
+    <div class=" d-flex justify-content-center">
+        <a href="{{request.META.HTTP_REFERER}}">Go Back.</a>
+    </div>
+</div>
+{% endblock %}
