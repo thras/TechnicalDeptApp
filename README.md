@@ -1,3 +1,6 @@
+Github link:
+https://github.com/thras/TechnicalDeptApp.git
+
 # Project Title
 **TechnicalDeptApp**, I named the project TechnicalDeptApp because I wanted to do something for my work and is also my exam project to get the certification from the Coding Factory 3 (educational program in software development) of the Athens University of Economics and Business https://codingfactory.aueb.gr/ so I combine them.
 
@@ -177,7 +180,7 @@ Change password to the logged in user
 ## Back-end 
 
 ### Database
-I used SQLite, is the default database that Djago use.
+I used SQLite, is the default database that Django use.
 
 ### The models
 **CustomUser** I use an abstract user model of Django to add new custom fields and I do this for two reasons. First because we can't do it later (after the first migration). Second at this project is for permissions and for future updates/upgrates.
