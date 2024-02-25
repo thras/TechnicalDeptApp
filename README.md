@@ -272,3 +272,4 @@ Add user permissions to all the views/templates.
 Searchable dropdown selections.
 
 Searchable list.
+
